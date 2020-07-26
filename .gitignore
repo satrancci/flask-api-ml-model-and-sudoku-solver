@@ -127,3 +127,18 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Other
+
+**/.DS_Store
+flask-api.code-workspace
+notes.txt
+site.db
+demo.md
+
+flasksite/static/profile_pics/*
+!flasksite/static/profile_pics/default.jpg
+
+flasksite/static/ml_pics/*
+!flasksite/static/ml_pics/default.jpg
+

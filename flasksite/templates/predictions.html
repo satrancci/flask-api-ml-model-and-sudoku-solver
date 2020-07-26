@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+<h2>Predictions made for {{ user }}, {{ email }} </h2>
+<br>
+<table border="1">
+    <td> <b> Date </b></td>
+    <td> <b> Image</b></td>
+    <td> <b> Prediction</b></td>
+    {% for prediction in predictions  %}
+    <tr>
+        <td> {{ prediction.date_uploaded.strftime("%m/%d/%Y, %H:%M:%S") }} UTC </td>
+        <td> <img src="{{ path+prediction.image_file }}" height = 100 width=100></td>
+        <td> {{ prediction.emotion_class }} </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<br>
+<small class="text-muted">
+    Do you want to classify another image? <a class="ml-2" href="{{ url_for('predict') }}">Click here</a>
+</small>
+
+
+
+{% endblock content %}

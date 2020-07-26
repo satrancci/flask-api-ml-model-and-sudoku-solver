@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="content-section">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-info") }}
+        </div>
+    </form>
+</div>
+
+<h2>API keys owned by {{ user }}, {{ email }} </h2>
+<br>
+<table border="1">
+    <td> <b> Date </b></td>
+    <td> <b> API_KEY</b></td>
+    {% for key in keys  %}
+    <tr>
+        <td> {{ key.date_created.strftime("%m/%d/%Y, %H:%M:%S") }} UTC </td>
+        <td> {{ key.key }} </td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+
+{% endblock content %}
