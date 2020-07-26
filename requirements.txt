@@ -24,4 +24,4 @@ WTForms
 keras==2.2.5
 opencv
 numpy
-tensorflow==1.15.0
+tensorflow==1.15.2
