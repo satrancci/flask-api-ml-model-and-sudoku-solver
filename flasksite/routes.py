@@ -1,6 +1,7 @@
 import os
 import secrets
 import mistune
+#from datetime import datetime, strptime
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, abort, jsonify
 from flasksite import app, db, bcrypt, mail, graph
@@ -267,6 +268,36 @@ def api_all_posts():
     posts = Post.query.filter_by(user_id=author_id).all()[::-1] # reverse to show the latest post first
     response = [ ( post.title,post.date_posted.strftime("%m/%d/%Y, %H:%M:%S")+" UTC" ) for post in posts]
     return jsonify(response) if response else "You have not published any posts"
+
+@app.route("/api/posts/new", methods=['POST'])
+def api_new_post():
+    author_id = None
+    try:
+        token = request.args['token']
+        keys = API_Key.query.all()
+        for key in keys:
+            if key.key == token:
+                author_id = int(key.user_id)
+                break
+        if not author_id:
+            return "Token is invalid"
+    except:
+        return 'You need to provide a token with a query'
+    title = request.args.get('title')
+    content = request.args.get('content')
+    author = User.query.filter_by(id = author_id).first()
+    post = Post(title=title, content=content, author=author)
+    db.session.add(post)
+    db.session.commit()
+    posts = Post.query.filter_by(user_id=author_id, title=title, content=content).all() # a very unlikely edge case: there may be multiple posts with same attributes :)
+    if not posts:
+        return "Could not retrieve post from the database"
+    posts.sort() # based on operator overlading __lt__ in modules.py. We get the latest post from the list of duplicates
+    return f"The post has been successfully created: {request.url_root}post/{posts[-1].id}"
+
+
+
+
 
 
 @app.route("/api/emoclassifier", methods=['POST'])
