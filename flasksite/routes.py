@@ -296,6 +296,25 @@ def api_new_post():
     return f"The post has been successfully created: {request.url_root}post/{posts[-1].id}"
 
 
+@app.route("/api/posts/last", methods=['GET'])
+def api_get_last_post():
+    author_id = None
+    try:
+        token = request.args['token']
+        keys = API_Key.query.all()
+        for key in keys:
+            if key.key == token:
+                author_id = int(key.user_id)
+                break
+        if not author_id:
+            return "Token is invalid"
+    except:
+        return 'You need to provide a token with a query'
+    posts = Post.query.filter_by(user_id = author_id).all()
+    if not posts:
+        return "You haven't posted any posts!"
+    return f"Your last post is: {posts[-1]} and is located at {request.url_root}post/{posts[-1].id}"
+
 
 
 
