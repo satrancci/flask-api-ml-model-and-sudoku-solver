@@ -2,6 +2,7 @@ from datetime import datetime
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flasksite import db, login_manager, app
 from flask_login import UserMixin
+from datetime import datetime
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -48,8 +49,12 @@ class Post(db.Model):
     content = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
+    def __lt__(self, other):
+        return self.date_posted < other.date_posted
+
     def __repr__(self):
-        return f"Post('{self.title}', '{self.date_posted}')"
+        t = self.date_posted
+        return f"Post('{self.title}', '{t.strftime('%Y-%m-%d %H:%M:%S')} UTC', {self.content})"
 
 class API_Key(db.Model):
     #__tablename__ = "API_Key"
