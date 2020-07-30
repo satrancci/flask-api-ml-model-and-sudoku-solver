@@ -62,18 +62,6 @@
           {% endwith %}
           {% block content %}{% endblock %}
         </div>
-          <div class="col-md-4">
-            <div class="content-section">
-              {% if current_user.is_authenticated %}
-                <p class='font-weight-bold'> Hi, {{ current_user.username }}!</p>
-                </p>
-              {% else %}
-                <p class='font-weight-bold'> Hi, anonymous user!</p>
-              {% endif %}
-              
-            </div>
-            
-          </div>
       </div>
     </main>
 
