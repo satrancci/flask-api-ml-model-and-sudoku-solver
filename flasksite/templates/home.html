@@ -1,4 +1,8 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1> Welcome! </h1>
+  {% if current_user.is_authenticated %}
+  <h2> Hi, {{ current_user.username }}!</h2>
+  {% else %}
+  <h2> Hi, anonymous user! </h2>
+  {% endif %}
 {% endblock content %}
