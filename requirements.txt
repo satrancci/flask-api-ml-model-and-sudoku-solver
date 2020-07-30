@@ -22,6 +22,6 @@ SQLAlchemy
 Werkzeug
 WTForms
 keras==2.2.5
-opencv
+opencv-python==3.4.4.19
 numpy
 tensorflow==1.15.2
