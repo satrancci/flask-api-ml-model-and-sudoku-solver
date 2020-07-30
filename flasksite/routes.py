@@ -1,7 +1,6 @@
 import os
 import secrets
 import mistune
-#from datetime import datetime, strptime
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, abort, jsonify
 from flasksite import app, db, bcrypt, mail, graph
@@ -338,7 +337,7 @@ def api_gelete_last_post():
     db.session.commit()
     if post_to_delete in Post.query.filter_by(user_id = author_id).all():
         return "An error occurred while deleting a post"
-    return f"Your last post is: {post_to_delete} has been successfully deleted."
+    return f"Your last post {post_to_delete} has been successfully deleted."
 
 
 @app.route("/api/emoclassifier", methods=['POST'])
