@@ -17,6 +17,7 @@ MarkupSafe
 mistune
 Pillow
 psycopg2
+psycopg2-binary
 pycparser
 six
 SQLAlchemy
