@@ -16,6 +16,7 @@ Jinja2
 MarkupSafe
 mistune
 Pillow
+psycopg2
 pycparser
 six
 SQLAlchemy
