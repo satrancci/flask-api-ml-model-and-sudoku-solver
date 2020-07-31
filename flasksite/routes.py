@@ -213,12 +213,8 @@ def predict():
 
             if current_user.is_authenticated:
                 pic = EmotionPrediction(image_file=picture_fn, emotion_class = pred, uploader=current_user)
-            else:
-                pic = EmotionPrediction(image_file=picture_fn, emotion_class = pred) # uploader will default to Anonymous User
-            db.session.add(pic)
-            db.session.commit()
-            
-            if current_user.is_authenticated:
+                db.session.add(pic)
+                db.session.commit()
                 return redirect(url_for('display_predictions'))
             else:
                 flash(f"Your prediction is:  {pred.upper()}", 'success')
