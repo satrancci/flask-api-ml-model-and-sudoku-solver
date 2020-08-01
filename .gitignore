@@ -135,6 +135,7 @@ flask-api.code-workspace
 notes.txt
 site.db
 demo.md
+things_to_do.md
 
 flasksite/static/profile_pics/*
 !flasksite/static/profile_pics/default.jpg
