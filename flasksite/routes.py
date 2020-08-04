@@ -1,9 +1,8 @@
 import os
 import secrets
-import mistune
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, abort, jsonify
-from flasksite import app, db, bcrypt, mail, graph
+from flasksite import app, db, bcrypt, mail, graph, API_DOCUMENTATION_LINK
 from flasksite.forms import (RegistrationForm, LoginForm, UpdateAccountForm,
                              PostForm, RequestResetForm, ResetPasswordForm, UploadImage,
                              GenerateToken)
@@ -24,9 +23,9 @@ def blog():
     return render_template('blog.html', posts=posts)
 
 
-@app.route("/about")
-def about():
-    return render_template('about.html', title='About')
+@app.route("/api_documentation")
+def api_documentation():
+    return render_template('api_documentation.html', title = 'API Documentation', link=API_DOCUMENTATION_LINK) 
 
 @app.route("/projects")
 def projects():
@@ -379,15 +378,6 @@ def emoclassifierAPI():
 @app.route("/sudoku_solver", methods=['GET', 'POST'])
 def sudoku_solver():
     return render_template('sudoku.html', title = 'Sudoku Solver')
-
-
-
-@app.route("/api", methods=['GET']) # would like to have an API documentation here in Markdown
-def api():
-    path = os.path.join(app.root_path, 'templates','demo.md') 
-    with open(path, 'r') as f:
-        data = f.read()
-    return render_template('api.html', data=mistune.markdown(data), title = 'API') 
 
 
 
