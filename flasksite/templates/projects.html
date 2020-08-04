@@ -1,6 +1,8 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>My Projects</h1>
-    <p><a href="{{ url_for('predict') }}">Emotion Classifier</a></p>
-    <p><a href="{{ url_for('sudoku_solver') }}">Sudoku Solver</a></p>
+    <h2>My Projects</h2>
+    <div class="border-top pt-3">
+    <p> <img src="../static/other_pics/emotion.png" alt="Emotion" height="48" width="48"/> Emotion Classifier: <a href="{{ url_for('predict') }}"><i class="fa fa-link"></i></a> </p>
+    <p> <img src="../static/other_pics/sudoku.png" alt="Sudoku" height="48" width="48"/> Sudoku Solver: <a href="{{ url_for('sudoku_solver') }}"><i class="fa fa-link"></i></a> </p>
+    </div>
 {% endblock content %}
