@@ -78,3 +78,26 @@ a.article-title:hover {
 .account-heading {
   font-size: 2.5rem;
 }
+
+
+.site-footer .navbar-nav .nav-link {
+  color: #cbd5db;
+}
+
+.site-footer .navbar-nav .nav-link:hover {
+  color: #ffffff;
+}
+
+.site-footer .navbar-nav .nav-link.active {
+  font-weight: 500;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #ffffff;
+  color: black;
+  text-align: center;
+}
