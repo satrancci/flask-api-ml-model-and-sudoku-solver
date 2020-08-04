@@ -23,6 +23,8 @@ login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 login_manager.login_message_category = 'info'
 
+API_DOCUMENTATION_LINK = 'https://documenter.getpostman.com/view/11985382/T1LFmVRw?version=latest'
+
 graph = tf.get_default_graph() # https://kobkrit.com/tensor-something-is-not-an-element-of-this-graph-error-in-keras-on-flask-web-server-4173a8fe15e1
 
 from flasksite import routes
