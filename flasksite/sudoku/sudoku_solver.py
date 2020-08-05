@@ -1,12 +1,21 @@
 ######## Util functions
 
+def validate_input(s):
+    valid = '0123456789.'
+    for char in s:
+        if char not in valid:
+            return False
+    return True
+
 def preprocess_sudoku(s): # s is a string of length 81; 0 stands for empty cell
     digits = list(map(lambda x: '.' if x == '0' else x, s))
     matrix = [digits[i:i+9] for i in range(0,len(digits),9)]
     return matrix
 
 def postprocess_sudoku(matrix): # once solved, convert the board back into a string of length 81
-    return ''.join([matrix[i][j] for i in range(9) for j in range(9)]) 
+    return ''.join([matrix[i][j] for i in range(9) for j in range(9)])
+
+
 
 
 #########################################################

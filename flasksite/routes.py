@@ -11,7 +11,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
 from flasksite.ml_model.image import predict_emotion
 from flasksite.utils import save_picture, generate_api_key
-from flasksite.sudoku.sudoku_solver import Sudoku, preprocess_sudoku, postprocess_sudoku
+from flasksite.sudoku.sudoku_solver import Sudoku, preprocess_sudoku, postprocess_sudoku, validate_input
 
 @app.route("/")
 def home():
@@ -375,6 +375,9 @@ def sudoku_solver():
     form = SolveSudoku()
     if form.validate_on_submit():
         position = form.position.data
+        if not validate_input(position):
+            flash('Your input is not valid!', 'danger')
+            return redirect(url_for('sudoku_solver'))
         matrix = preprocess_sudoku(position)
         s = Sudoku(matrix)
         solution = s.solve()
