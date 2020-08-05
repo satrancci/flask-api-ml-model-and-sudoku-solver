@@ -1,6 +1,8 @@
 ######## Util functions
 
 def validate_input(s):
+    if len(s) != 81:
+        return False
     valid = '0123456789.'
     for char in s:
         if char not in valid:
