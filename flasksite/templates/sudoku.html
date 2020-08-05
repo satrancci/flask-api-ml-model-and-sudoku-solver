@@ -26,7 +26,16 @@
 </div>
 <div class="border-top pt-3">
     <small class="text-muted">
-        Already Have An Account? <a class="ml-2" href="{{ url_for('login') }}">Sign In</a>
+        Input requirements:
+        <p>1. String must be strictly of size <mark>81</mark>. <br>
+        2. Denote an empty cell as <mark>0</mark> or <mark>.</mark>, everything else as {1,2,...,9} <br>
+        3. Try some examples: <br>
+            a. 530070000600195000098000060800060003400803001700020006060000280000419005000080079 (valid) <br>
+            b. 53<b>1</b>070000600195000098000060800060003400803001700020006060000280000419005000080079 (invalid) <br>
+            c. .....7..9.4..812.....9...1...53...72293....5......53..8...23...7...5..4.531.7.... (valid) <br>
+            d. 000007009040081200000900010005300072293000050000005300800023000700050040531070000 (valid) <br>
+            e. 000000000000000000000000000000000000000000000000000000000000000000000000000000000 (valid) <br>
+        </p>
     </small>
 </div>
 
