@@ -412,7 +412,7 @@ def api_solve_sudoku():
     except:
         return 'You need to provide a token with a query'
     try:
-        position = request.args.get('position')
+        position = request.args['position']
     except:
         return "Query parameter must be POSITION"
     if not validate_input(position):
@@ -422,7 +422,10 @@ def api_solve_sudoku():
     solution = s.solve()
     if solution:
         res = postprocess_sudoku(matrix)
-        return f"Solution: {res}"
+        res_formatted = ''
+        for i in range(0,len(res),9):
+            res_formatted += res[i:i+9]+'\n'
+        return f"Solution:\n {res_formatted}"
     else:
         return 'Your sudoku puzzle has no solution'
     
