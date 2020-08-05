@@ -5,12 +5,13 @@ from flask import render_template, url_for, flash, redirect, request, abort, jso
 from flasksite import app, db, bcrypt, mail, graph, API_DOCUMENTATION_LINK
 from flasksite.forms import (RegistrationForm, LoginForm, UpdateAccountForm,
                              PostForm, RequestResetForm, ResetPasswordForm, UploadImage,
-                             GenerateToken)
+                             GenerateToken, SolveSudoku)
 from flasksite.models import User, Post, API_Key, EmotionPrediction
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
 from flasksite.ml_model.image import predict_emotion
 from flasksite.utils import save_picture, generate_api_key
+from flasksite.sudoku.sudoku_solver import Sudoku, preprocess_sudoku, postprocess_sudoku
 
 @app.route("/")
 def home():
@@ -369,15 +370,27 @@ def emoclassifierAPI():
     return pred
 
 
-
-
-
-
-################################### NOT READY
-
 @app.route("/sudoku_solver", methods=['GET', 'POST'])
 def sudoku_solver():
-    return render_template('sudoku.html', title = 'Sudoku Solver')
+    form = SolveSudoku()
+    if form.validate_on_submit():
+        position = form.position.data
+        matrix = preprocess_sudoku(position)
+        s = Sudoku(matrix)
+        solution = s.solve()
+        if solution:
+            flash('Your sudoku puzzle has been solved!', 'success')
+            res = postprocess_sudoku(matrix) # convert back to string of length 81
+            return redirect(url_for('sudoku_result', res=res))
+        else:
+            flash('Your sudoku puzzle has no solution', 'danger')
+    return render_template('sudoku.html', title = 'Sudoku Solver', form=form)
 
+@app.route("/sudoku_result", methods=['GET'])
+def sudoku_result():
+    res = request.args.get('res')
+    matrix = preprocess_sudoku(res)
+    matrix = [list(map(int, row)) for row in matrix] # convert to int for better display in the template
+    return render_template('sudoku_result.html', title = 'Your sudoku was solved!',  matrix=matrix)
 
 
