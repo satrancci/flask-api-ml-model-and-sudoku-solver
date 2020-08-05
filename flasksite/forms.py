@@ -87,3 +87,7 @@ class UploadImage(FlaskForm):
 
 class GenerateToken(FlaskForm):
     submit = SubmitField('Generate my API token!')
+
+class SolveSudoku(FlaskForm):
+    position = StringField('Sudoku Position', validators=[DataRequired(), Length(min=81, max=81)])
+    submit = SubmitField('Solve!')
