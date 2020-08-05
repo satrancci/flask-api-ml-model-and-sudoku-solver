@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block content %}
+<table style="width:300px; height:300px; border: 1px solid black">
+    {% for row in matrix %}
+    <tr style="border: 1px solid black">
+        {% for num in row %}
+        <td style="border: 1px solid black"> <center><b>{{ num }}</b></center></td>
+        {% endfor %}
+    </tr>       
+    {% endfor %}
+</table>
+
+{% endblock content %}
