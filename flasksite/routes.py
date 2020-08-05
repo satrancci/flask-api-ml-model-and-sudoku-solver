@@ -411,7 +411,10 @@ def api_solve_sudoku():
             return "Token is invalid"
     except:
         return 'You need to provide a token with a query'
-    position = request.args.get('position')
+    try:
+        position = request.args.get('position')
+    except:
+        return "Query parameter must be POSITION"
     if not validate_input(position):
         return "Your input is not valid! Position must be strictly of size 81. Denote an empty cell as '0' or '.' , everything else as {1,2,...,9}"
     matrix = preprocess_sudoku(position)
