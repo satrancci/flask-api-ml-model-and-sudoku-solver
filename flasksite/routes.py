@@ -397,3 +397,29 @@ def sudoku_result():
     return render_template('sudoku_result.html', title = 'Your sudoku was solved!',  matrix=matrix)
 
 
+@app.route("/api/solve_sudoku", methods=['POST'])
+def api_solve_sudoku():
+    author_id = None
+    try:
+        token = request.args['token']
+        keys = API_Key.query.all()
+        for key in keys:
+            if key.key == token:
+                author_id = int(key.user_id)
+                break
+        if not author_id:
+            return "Token is invalid"
+    except:
+        return 'You need to provide a token with a query'
+    position = request.args.get('position')
+    if not validate_input(position):
+        return "Your input is not valid! Position must be strictly of size 81. Denote an empty cell as '0' or '.' , everything else as {1,2,...,9}"
+    matrix = preprocess_sudoku(position)
+    s = Sudoku(matrix)
+    solution = s.solve()
+    if solution:
+        res = postprocess_sudoku(matrix)
+        return f"Solution: {res}"
+    else:
+        return 'Your sudoku puzzle has no solution'
+    
