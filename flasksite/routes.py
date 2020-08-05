@@ -420,10 +420,10 @@ def api_solve_sudoku():
         return "Query parameter must be POSITION"
     if not validate_input(position):
         return "Your input is not valid! Position must be strictly of size 81. Denote an empty cell as '0' or '.' , everything else as {1,2,...,9}"
-    if not s.is_valid_position():
-        return "The starting position is not valid!"
     matrix = preprocess_sudoku(position)
     s = Sudoku(matrix)
+    if not s.is_valid_position():
+        return "The starting position is not valid!"
     solution = s.solve()
     if solution:
         res = postprocess_sudoku(matrix)
