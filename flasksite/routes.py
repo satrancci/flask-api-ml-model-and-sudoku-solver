@@ -376,10 +376,13 @@ def sudoku_solver():
     if form.validate_on_submit():
         position = form.position.data
         if not validate_input(position):
-            flash('Your input is not valid!', 'danger')
+            flash('Your input is not valid! See the requirements below.', 'danger')
             return redirect(url_for('sudoku_solver'))
         matrix = preprocess_sudoku(position)
         s = Sudoku(matrix)
+        if not s.is_valid_position():
+            flash('The starting position is not valid!', 'danger')
+            return redirect(url_for('sudoku_solver'))
         solution = s.solve()
         if solution:
             flash('Your sudoku puzzle has been solved!', 'success')
@@ -417,6 +420,8 @@ def api_solve_sudoku():
         return "Query parameter must be POSITION"
     if not validate_input(position):
         return "Your input is not valid! Position must be strictly of size 81. Denote an empty cell as '0' or '.' , everything else as {1,2,...,9}"
+    if not s.is_valid_position():
+        return "The starting position is not valid!"
     matrix = preprocess_sudoku(position)
     s = Sudoku(matrix)
     solution = s.solve()
