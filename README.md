@@ -12,7 +12,7 @@ Later, a sudoku solver was added to this project, which is also available in the
 1. Arriaga, O et al. (2017). <em>Face detection and emotion classification</em>. [Link][1]
 2. Kumar, A. (2018). <em>Demonstration of Facial Emotion Recognition on Real Time Video Using CNN : Python & Keras</em>. [Link][2]
 3. Mahoor, M. (2017). <em>AffectNet</em>. [Link][3]
-4. Schaefer, C. (2018). <em>Flask Tutorial</em>. [Link][4]
+4. Schafer, C. (2018). <em>Flask Tutorial</em>. [Link][4]
 5. Wolfram Data Repository (2017). <em>FER-2013</em>. [Link][5]
 
 [1]: https://github.com/oarriaga/face_classification
