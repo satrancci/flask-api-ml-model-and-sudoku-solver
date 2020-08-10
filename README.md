@@ -1,6 +1,6 @@
 # Deploying ML model with Flask
 
-The emotion classification model `/flasksite/ml_model/models/mini_XCEPTION_AffectNet_stratified_with_loss_.60-0.70.hdf5` was developed during the Spring 2020 as the requirement for the final project for CS5750 Machine Learning class at Saint Louis University. The model was trained on FER-2013 [[5]] and AffectNet [[3]] datasets. 
+The emotion classification model `/flasksite/ml_model/models/mini_XCEPTION_AffectNet_stratified_with_loss_.60-0.70.hdf5` was developed in the spring 2020 as the requirement for the final project for CS5750 Machine Learning class at Saint Louis University. The model was trained on FER-2013 [[5]] and AffectNet [[3]] datasets. 
 
 The goal of this project was to deploy the model on the web using Flask framework, and also make it available via an API. The API documentation can be accessed [here][6].
 
